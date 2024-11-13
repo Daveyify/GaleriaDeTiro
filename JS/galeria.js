@@ -29,7 +29,7 @@ scene.add(camera)
 
 //objetivos
 const objetivos = [];
-const objetivoGeometry = new THREE.SphereGeometry(0.3, 32, 16);
+const objetivoGeometry = new THREE.SphereGeometry(0.3, 8, 8);
 const objetivoMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 function crearObjetivo() {
