@@ -19,12 +19,19 @@ document.body.appendChild(VRButton.createButton(renderer));
 
 camera.position.z = 1
 
-//arma
+//arma  
 const armaGeometry = new THREE.BoxGeometry( 0.5, 0.5, 2 ); 
 const armaMaterial = new THREE.MeshBasicMaterial( {color: 0x00fff0} ); 
 const arma = new THREE.Mesh( armaGeometry, armaMaterial ); 
 arma.position.set(1, -0.5, -2)
 camera.add(arma)
+
+//mira 
+const miraGeometry = new THREE.BoxGeometry(0.02, 0.02, 0.5)
+const miraMaterial = new THREE.MeshBasicMaterial({color: 0xffffff})
+const mira = new THREE.Mesh( miraGeometry, miraMaterial )
+mira.position.set(0, 0, -2)
+camera.add(mira)
 scene.add(camera)
 
 //objetivos
@@ -75,7 +82,6 @@ window.addEventListener('click', (event) => {
 
 // Animación
 function animate() {
-    //requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
 }
