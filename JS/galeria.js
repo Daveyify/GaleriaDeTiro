@@ -16,19 +16,22 @@ document.body.appendChild(VRButton.createButton(renderer));
 // Posición inicial de la cámara
 camera.position.set(0, 1.6, 0); // Altura típica de una persona en VR
 
+const armaGroup = new THREE.Group();
+camera.add(armaGroup);
+
 // Arma
 const armaGeometry = new THREE.BoxGeometry(0.5, 0.5, 2);
 const armaMaterial = new THREE.MeshBasicMaterial({ color: 0x00fff0 });
 const arma = new THREE.Mesh(armaGeometry, armaMaterial);
 arma.position.set(0.3, -0.2, -0.8); // Ajustar posición relativa a la cámara
-camera.add(arma);
+armaGroup.add(arma);
 
 // Mira
 const miraGeometry = new THREE.BoxGeometry(0.02, 0.02, 0.5);
 const miraMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 const mira = new THREE.Mesh(miraGeometry, miraMaterial);
 mira.position.set(0, 0, -1); // Ajustar posición relativa a la cámara
-camera.add(mira);
+armaGroup.add(mira);
 
 // Añadir la cámara a la escena
 scene.add(camera);
