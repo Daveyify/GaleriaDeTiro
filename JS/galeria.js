@@ -1,44 +1,57 @@
 import * as THREE from 'three';
+//import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { VRButton } from 'three/addons/webxr/VRButton.js';
 
 // Configuración básica
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
+//const controls = new OrbitControls(camera, renderer.domElement);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true; // Habilitar sombras
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.xr.enabled = true;
 renderer.xr.setReferenceSpaceType('local');
 document.body.appendChild(renderer.domElement);
-document.body.appendChild(VRButton.createButton(renderer));
+document.body.appendChild(VRButton.createButton(renderer)); 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+let loader = new THREE.TextureLoader()
+
+var armaN = loader.load('JS/arma.png');
 
 // Posición inicial de la cámara
 camera.position.set(0, 1.6, 0); // Altura típica de una persona en VR
 
-const armaGroup = new THREE.Group();
-camera.add(armaGroup);
+//Al rededor
+function Fondo(){
+    const fondoGeometry = new THREE.PlaneGeometry();
+}
+
 
 // Arma
-const armaGeometry = new THREE.BoxGeometry(0.5, 0.5, 2);
-const armaMaterial = new THREE.MeshBasicMaterial({ color: 0x00fff0 });
+const armaGeometry = new THREE.PlaneGeometry(1, 0.5);
+const armaMaterial = new THREE.MeshStandardMaterial(
+    { 
+        color: 0xffffff,
+    });
 const arma = new THREE.Mesh(armaGeometry, armaMaterial);
-arma.position.set(0.3, -0.2, -0.8); // Ajustar posición relativa a la cámara
-armaGroup.add(arma);
+arma.position.set(0.3, -0.2, -0.8);
+arma.rotation.set(0, Math.PI/2, 0)
+camera.add(arma);
 
 // Mira
-const miraGeometry = new THREE.BoxGeometry(0.02, 0.02, 0.5);
+const miraGeometry = new THREE.PlaneGeometry(0.02, 0.02);
 const miraMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 const mira = new THREE.Mesh(miraGeometry, miraMaterial);
 mira.position.set(0, 0, -1); // Ajustar posición relativa a la cámara
-armaGroup.add(mira);
+camera.add(mira);
 
 // Añadir la cámara a la escena
 scene.add(camera);
 
 // Objetivos
 const objetivos = [];
-const objetivoGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+const objetivoGeometry = new THREE.PlaneGeometry(0.3, 0.3);
 const objetivoMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
 function crearObjetivo() {
@@ -77,8 +90,15 @@ function disparar() {
     }
 }
 
+
+
 // Evento de disparo
 window.addEventListener('click', disparar);
+
+//Luz
+const light = new THREE.AmbientLight( 0xffffff ); // soft white light
+camera.add( light );
+
 
 // Animación
 function animate() {
@@ -86,3 +106,4 @@ function animate() {
 }
 
 renderer.setAnimationLoop(animate);
+
