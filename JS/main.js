@@ -197,7 +197,7 @@ function loadNewScene() {
     window.location.href = 'index2.html';
 }
 
-window.addEventListener('click', teletransportar);
+window.addEventListener('dbclick', teletransportar);
 /*
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
