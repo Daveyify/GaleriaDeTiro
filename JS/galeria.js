@@ -205,7 +205,7 @@ function disparar() {
 }
 
 // Evento de disparo
-window.addEventListener('click', disparar);
+window.addEventListener('auxclick', disparar);
 
 //Luces
 const lightAzul = new THREE.PointLight(0x00bfff, 2, 10);
